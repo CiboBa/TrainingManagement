@@ -1,39 +1,53 @@
 package pl.bciborowski.trainingmanagement.implementation;
 
-import com.sun.tools.javac.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.bciborowski.trainingmanagement.domain.Customer;
+import pl.bciborowski.trainingmanagement.repository.CustomerRepository;
 import pl.bciborowski.trainingmanagement.service.CustomerService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-    private Map<Integer, Customer> customers;
+    @Autowired
+    private CustomerRepository customerRepository;
 
-    public CustomerServiceImpl(){
-        customers=new HashMap<>();
+    public CustomerServiceImpl() {
     }
 
     @Override
     public List<Customer> listAllCustomers() {
+        List<Customer> result = new LinkedList<>();
+        customerRepository.findAll().forEach(result::add);
+        return result;
+    }
+
+    @Override
+    public Customer getById(Integer id) {
+        Optional<Customer> result = customerRepository.findById(id);
+        return result.orElse(new Customer());
+    }
+
+    @Override
+    public Customer save(Customer customer) {
+        if (customer != null) {
+            return customerRepository.save(customer);
+        } else {
+            throw new RuntimeException("Nie mogę zapisać użytkownika!!! Wypełnij wszystkie pola!!!");
+        }
+    }
+
+    @Override
+    public Customer activateCustomer(Boolean active) {
         return null;
     }
 
     @Override
-    public Customer getCustomerById(Integer id) {
-        return null;
-    }
+    public void delete(Integer id) {
 
-    @Override
-    public Customer saveOrUpdateCustomer(Integer id) {
-        return null;
-    }
-
-    @Override
-    public Customer activeCustomer(Boolean active) {
-        return null;
     }
 }

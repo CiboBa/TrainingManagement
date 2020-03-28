@@ -1,14 +1,17 @@
 package pl.bciborowski.trainingmanagement.service;
 
+import java.util.List;
 import pl.bciborowski.trainingmanagement.domain.Customer;
 
 public interface CustomerService {
 
-    Object listAllCustomers();
+    List<Customer> listAllCustomers();
 
-    Customer getCustomerById(Integer id);
+    Customer getById(Integer id);
 
-    Customer saveOrUpdateCustomer(Integer id);
+    Customer save(Customer customer);
 
-    Customer activeCustomer(Boolean active);
+    Customer activateCustomer(Boolean active);
+
+    void delete(Integer id);
 }

@@ -9,14 +9,48 @@
           rel="stylesheet" media="screen"/>
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
-          th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+            th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
 
     <link href="../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 </head>
 <body>
-<div>
-
+<div class="container">
+    <div th:if="${not#lists.isEmpty(customers)}">
+        <h2>Lista użytkowników</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Email</th>
+                <th>PhoneNumber</th>
+                <th>Uprawnienia</th>
+                <th>Aktywność</th>
+            </tr>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}">1</td>
+                <td th:text="${customer.firstName}">Jacek</td>
+                <td th:text="${customer.lastName}">Kurski</td>
+                <td th:text="${customer.email}">kurski@tvp.pl</td>
+                <td th:text="${customer.phoneNumber}">666-666-666</td>
+                <td th:text="${customer.role}">ADMIN</td>
+                <td th:text="${customer.active}">TRUE</td>
+                <td>
+                    <a th:href="${'/customer/' + customer.id}">Show</a> <br/>
+                    <a th:href="${'/customer/edit/' + customer.id}">Edit</a> <br/>
+                    <a th:href="${'/customer/delete/' + customer.id}">Delete</a>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <a th:href="${'/customer/new'}">Nowy użytkownik</a>
+        </div>
+    </div>
+</div>
+<div th:if="${#lists.isEmpty(customers)}">
+    <h2>Lista użytkowników</h2>
+    <h3>Nikt nie jest zapisany</h3>
 </div>
 </body>
 </html>
