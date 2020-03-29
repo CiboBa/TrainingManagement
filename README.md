@@ -8,6 +8,7 @@ W ramach projektu należy utworzyć system usprawniający zarządzanie prowadzen
 * Kalendarz zajęć
 * Udostępnianie przez prowadzących materiałów dotyczących zajęć
 * Podsystem powiadomień
+
 ###Technologie
 * Spring + Hibernate
 * (opcjonalnie) Frontend w Angular
