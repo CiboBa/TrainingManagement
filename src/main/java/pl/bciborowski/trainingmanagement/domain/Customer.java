@@ -8,7 +8,7 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customer_id", nullable = false)
-    private Integer id;
+    private Integer customerId;
     @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "last_name")
@@ -21,15 +21,15 @@ public class Customer {
     private String phoneNumber;
     @Column(name = "role", nullable = false)
     private String role;
-    @Column(name = "active", nullable = false)
+    @Column(name = "active")
     private boolean isActive;
 
     public Integer getId() {
-        return id;
+        return customerId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.customerId = id;
     }
 
     public String getFirstName() {

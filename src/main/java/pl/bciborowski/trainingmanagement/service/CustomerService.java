@@ -11,7 +11,7 @@ public interface CustomerService {
 
     Customer save(Customer customer);
 
-    Customer activateCustomer(Boolean active);
+    void activateCustomer(Boolean active);
 
     void delete(Integer id);
 }

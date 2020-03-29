@@ -5,17 +5,21 @@
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
           rel="stylesheet" media="screen"/>
+
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
+
     <link href="../static/css/spring-core.css"
           th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
 </head>
+
 <body>
+
 <div class="container">
 
     <h2>Dane użytkownika</h2>
     <div>
-        <form class="form-horizontal" th:object="${customer}" th:action="@{/customer}" method="post">
+        <form class="form-horizontal" th:object="${customer}" th:action="@{/customer/}" method="post">
             <input type="hidden" th:field="*{id}"/>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Imię:</label>
@@ -53,7 +57,7 @@
         </form>
     </div>
     <div>
-        <a th:href="${'/customers'}">Wróć do listy</a>
+        <a th:href="${'/customer/list'}">Wróć do listy</a>
     </div>
 </div>
 </body>

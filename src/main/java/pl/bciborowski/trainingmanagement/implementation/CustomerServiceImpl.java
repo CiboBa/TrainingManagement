@@ -42,12 +42,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer activateCustomer(Boolean active) {
-        return null;
+    public void activateCustomer(Boolean active) {
     }
 
     @Override
     public void delete(Integer id) {
-
+        customerRepository.deleteById(id);
     }
 }

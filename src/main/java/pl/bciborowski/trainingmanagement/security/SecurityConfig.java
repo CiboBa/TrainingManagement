@@ -15,37 +15,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf().disable()
+                .headers().frameOptions().disable()
+                .and()
                 .authorizeRequests()
-                .antMatchers(
-                        "/",
-                        "/templates/**",
-                        "/static/**",
-                        "/webjars/**").permitAll()
-                .antMatchers("/customers/**", "/customer/**", "/customerPanel/**")
-                .hasAnyRole("CUSTOMER", "ADMIN")
+                .antMatchers("/templates/**", "/static/**", "/webjars/**", "/", "/login*", "/customerForm*", "/customer/new").permitAll()
+                .antMatchers("/customers/**", "/customer/**","/customerPanel/**" +
+                                "/courses/**", "/course/**", "/courseForm/**",
+                        "/lectures/**", "/lecture/**", "/lectureForm/**"
+                ).hasAnyRole("CUSTOMER_ROLE", "ADMIN_ROLE")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login-process")
-                .successForwardUrl("/customerPanel")
-                .permitAll()
+                .defaultSuccessUrl("/customer/panel", true)
                 .and()
-                .logout().invalidateHttpSession(true)
+                .logout()
+                .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
-                .permitAll()
-                .and().exceptionHandling()
+                .and()
+                .exceptionHandling()
                 .accessDeniedPage("/login");
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}a").roles("ADMIN_ROLE")
+                .and()
+                .withUser("customer").password("{noop}c").roles("CUSTOMER_ROLE")
+                .and()
+                .withUser("trainer").password("{noop}t").roles("TRAINER_ROLE");
     }
 
-    protected PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

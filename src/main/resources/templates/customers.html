@@ -6,7 +6,7 @@
 
     <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.7/css/bootstrap.min.css"
           th:href="@{/webjars/bootstrap/3.3.7/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
+          rel="stylesheet" media="screen" />
 
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.2.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.2.1/jquery.min.js}"></script>
@@ -21,10 +21,10 @@
         <table class="table table-striped">
             <tr>
                 <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
                 <th>Email</th>
-                <th>PhoneNumber</th>
+                <th>Numer telefonu</th>
                 <th>Uprawnienia</th>
                 <th>Aktywność</th>
             </tr>
@@ -37,20 +37,25 @@
                 <td th:text="${customer.role}">ADMIN</td>
                 <td th:text="${customer.active}">TRUE</td>
                 <td>
-                    <a th:href="${'/customer/' + customer.id}">Show</a> <br/>
-                    <a th:href="${'/customer/edit/' + customer.id}">Edit</a> <br/>
-                    <a th:href="${'/customer/delete/' + customer.id}">Delete</a>
+                    <a th:href="${'/customer/' + customer.id}">Pokaż</a> <br/>
+                    <a th:href="${'/customer/edit/' + customer.id}">Zmień</a> <br/>
+                    <a th:href="${'/customer/delete/' + customer.id}">Usuń</a>
                 </td>
             </tr>
         </table>
         <div>
-            <a th:href="${'/customer/new'}">Nowy użytkownik</a>
+            <a th:href="${'/customer/new'}">Nowy użytkownik</a><br/>
+            <a th:href="${'/customer/panel'}">Wróć</a>
         </div>
     </div>
 </div>
 <div th:if="${#lists.isEmpty(customers)}">
     <h2>Lista użytkowników</h2>
     <h3>Nikt nie jest zapisany</h3>
+    <div>
+        <a th:href="${'/customer/new'}">Nowy użytkownik</a><br/>
+        <a th:href="${'/customer/panel'}">Wróć</a>
+    </div>
 </div>
 </body>
 </html>

@@ -15,11 +15,14 @@
 </head>
 <body>
 <div class="container">
-    <h2>Jesteś zalogowany na koncie:</h2>
-    <a th:href="courses">Kursy</a><br/>
-    <a th:href="customer">Edytuj profil</a><br/>
-    <a th:href="customers">Lista użytkowników</a><br/><br/>
-    <a th:href="logout">Wyloguj</a>
+    <div>
+        <h2>Jesteś zalogowany na koncie:</h2>
+        <h2 th:text="${#authentication.name}"/>
+        <a th:href="${'/course/list'}">Lista kursów</a><br/>
+        <a th:href="${'/customer/edit'}">Edytuj profil</a><br/>
+        <a th:href="${'/customer/list'}">Lista użytkowników</a><br/><br/>
+        <a th:href="${'/logout'}">Wyloguj</a>
+    </div>
 </div>
 </body>
 </html>

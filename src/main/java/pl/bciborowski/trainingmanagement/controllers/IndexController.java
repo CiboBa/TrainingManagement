@@ -18,7 +18,12 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(Model model) {
-        model.addAttribute("mode", indexMode);
+//        model.addAttribute("mode", indexMode);
         return "index";
+    }
+
+    @RequestMapping("/login")
+    public String login() {
+        return "login";
     }
 }
